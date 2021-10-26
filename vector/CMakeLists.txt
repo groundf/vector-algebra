@@ -35,6 +35,7 @@ target_include_directories(${PROJECT_NAME}
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/vector
     INTERFACE
         ${CMAKE_CURRENT_SOURCE_DIR}/include
     )
@@ -55,7 +56,15 @@ if (NOT IS_SUBPROJECT)
 
     enable_testing()
 
-    add_executable(vector_unit_test tests/vector_test.cpp)
-    target_link_libraries(vector_unit_test PRIVATE Catch2::Catch2WithMain)
-    add_test(NAME vector_unit_test COMMAND vector_unit_test)
+    add_executable(${PROJECT_NAME}_test tests/vector_test.cpp)
+
+    target_include_directories(${PROJECT_NAME}_test
+            PRIVATE
+                ${CMAKE_CURRENT_SOURCE_DIR}/include
+                ${CMAKE_CURRENT_SOURCE_DIR}/include/vector
+    )
+
+    target_link_libraries(${PROJECT_NAME}_test PRIVATE Catch2::Catch2WithMain)
+
+    add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}_test)
 endif()
