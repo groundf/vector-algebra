@@ -1,6 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include <vector/vector.hpp>
+#include <vector/Vector2.hpp>
+#include <vector/Vector3.hpp>
 
 using namespace gof;
 
