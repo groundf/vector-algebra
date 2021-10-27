@@ -14,14 +14,14 @@ TEST_CASE("Vector N", "[vector_n]") {
 
     SECTION("1") {
         Vector<2, float> u(1.0f);
-        REQUIRE(u._v[0] == 1.0f);
-        REQUIRE(u._v[1] == 0.0f);
+        REQUIRE(u.x() == 1.0f);
+        REQUIRE(u.y() == 0.0f);
     }
 
     SECTION("2") {
         Vector<2, float> u(1.0f, 1.0f);
-        REQUIRE(u._v[0] == 1.0f);
-        REQUIRE(u._v[1] == 1.0f);
+        REQUIRE(u.x() == 1.0f);
+        REQUIRE(u.y() == 1.0f);
     }
 
     SECTION("3") {
@@ -34,6 +34,29 @@ TEST_CASE("Vector N", "[vector_n]") {
         Vector2f v(1.0f, 2.0f);
         REQUIRE(v.x() == 1.0f);
         REQUIRE(v.y() == 2.0f);
+    };
+
+    SECTION("unary operator -") {
+        Vector2f u(1.0f, 2.0f);
+        auto v = -u;
+        REQUIRE(v.x() == -1.0f);
+        REQUIRE(v.y() == -2.0f);
+    };
+
+    SECTION("binary operator +") {
+        Vector2f u(1.0f, 2.0f);
+        Vector2f v(2.0f, 1.0f);
+        auto w = u + v;
+        REQUIRE(w.x() == 3.0f);
+        REQUIRE(w.y() == 3.0f);
+    };
+
+    SECTION("binary operator -") {
+        Vector2f u(1.0f, 2.0f);
+        Vector2f v(1.0f, 2.0f);
+        auto w = u - v;
+        REQUIRE(w.x() == 0.0f);
+        REQUIRE(w.y() == 0.0f);
     };
 }
 

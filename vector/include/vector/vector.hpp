@@ -9,36 +9,92 @@
 
 namespace gof {
 
-///
 /// Vector class compile-time (constexpr).
-///
+/// No more then four elements should be allowed.
 template <std::size_t N, typename T>
 class Vector {
+
+    const std::array<T, N> _v;
 
   public:
 
     static constexpr std::size_t size = N;
 
+    /// Constructor
     Vector() = default;
 
     /// Missing values will be filled with zeros.
     template <typename... Ts>
     constexpr Vector(const Ts &... xs) : _v({{xs...}}) { }
 
-    const std::array<T, N> _v;
-
+    /// Return the value of component #1.
+    /// The method will be compiled only when the N >= 1.
     template <std::size_t Q = N, typename = std::enable_if_t<Q >= 1>>
-    inline constexpr T x() const noexcept { return _v[0]; }
+    constexpr T x() const noexcept { return _v[0]; }
 
+    /// Return the value of component #2.
+    /// The method will be compiled only when the N >= 2.
     template <std::size_t Q = N, typename = std::enable_if_t<Q >= 2>>
-    inline constexpr T y() const noexcept { return _v[1]; }
+    constexpr T y() const noexcept { return _v[1]; }
 
+    /// Return the value of component #3.
+    /// The method will be compiled only when the N >= 3.
     template <std::size_t Q = N, typename = std::enable_if_t<Q >= 3>>
-    inline constexpr T z() const noexcept { return _v[2]; }
+    constexpr T z() const noexcept { return _v[2]; }
 
+    /// Return the value of component #4.
+    /// The method will be compiled only when the N >= 4.
     template <std::size_t Q = N, typename = std::enable_if_t<Q == 4>>
-    inline constexpr T w() const noexcept { return _v[3]; }
+    constexpr T w() const noexcept { return _v[3]; }
 };
+
+
+/// Binary operator `*`.
+template <std::size_t N, typename T>
+constexpr Vector<N, T> operator *(T const& factor, Vector<N, T> const& self) {
+    // Conditional compilation with `constexpr if`.
+    if constexpr(N == 1) {
+        return {factor * self.x()};
+    }
+    if constexpr(N == 2) {
+        return {factor * self.x(), factor * self.y()};
+    }
+    if constexpr(N == 3) {
+        return {factor * self.x(), factor * self.y(), factor * self.z()};
+    }
+    if constexpr(N == 4) {
+        return {factor * self.x(), factor * self.y(), factor * self.z(), factor * self.w()};
+    }
+}
+
+/// Unary operator `-`.
+template <std::size_t N, typename T>
+constexpr Vector<N, T> operator -(Vector<N, T> const& self) {
+    return (-T{1}) * self;
+}
+
+// Binary operator `+`.
+template <std::size_t N, typename T>
+constexpr Vector<N, T> operator +(Vector<N, T> const& self, Vector<N, T> const& that) {
+    if constexpr(N == 1) {
+        return {self.x() + that.x()};
+    }
+    if constexpr(N == 2) {
+        return {self.x() + that.x(), self.y() + that.y()};
+    }
+    if constexpr(N == 3) {
+        return {self.x() + that.x(), self.y() + that.y(), self.z() + that.z()};
+    }
+    if constexpr(N == 4) {
+        return {self.x() + that.x(), self.y() + that.y(), self.z() + that.z(), self.w() + that.w()};
+    }
+}
+
+// Binary operator `-`.
+template <std::size_t N, typename T>
+constexpr Vector<N, T> operator -(Vector<N, T> const& self, Vector<N, T> const& that) {
+    return self + ( (-T{1}) * that );
+}
 
 } // namespace
 
