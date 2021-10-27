@@ -8,7 +8,7 @@ project(
     )
 
 # Pokud není hlavním projektem, pravděpodobně nechceme sestavovat testy.
-if(DEFINED  PROJECT_NAME)
+if(NOT DEFINED PROJECT_NAME)
         set(${PROJECT_NAME}_IS_SUBPROJECT ON)
         message(STATUS "${PROJECT_NAME}_IS_SUBPROJECT: True")
     else()
