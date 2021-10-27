@@ -3,6 +3,8 @@
 #ifndef VECTOR_HEADER_LIBRARY
 #define VECTOR_HEADER_LIBRARY
 
+// import <vector>; Modules doesn't work?!
+
 #include <array>
 #include <cstddef>
 #include <type_traits>
@@ -95,6 +97,12 @@ template <std::size_t N, typename T>
 constexpr Vector<N, T> operator -(Vector<N, T> const& self, Vector<N, T> const& that) {
     return self + ( (-T{1}) * that );
 }
+
+
+int plus(int a, int b) {
+    return a + b;
+}
+
 
 } // namespace
 
