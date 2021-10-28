@@ -1,5 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 
+#include <vector/Types.hpp>
 #include <vector/Vector.hpp>
 
 #include <vector/simple/Vector2.hpp>
@@ -10,8 +11,6 @@ using namespace gof;
 
 
 TEST_CASE("Vector N", "[vector_n]") {
-
-    using Vector2f = Vector<2, float>;
 
     SECTION("1") {
         Vector<2, float> u(1.0f);
@@ -59,7 +58,22 @@ TEST_CASE("Vector N", "[vector_n]") {
         REQUIRE(w.x() == 0.0f);
         REQUIRE(w.y() == 0.0f);
     };
+
+    // This should not compile.
+    // SECTION("wrong type") {
+    //     #include <string>
+    //     Vector<2, std::string> v("a", "b");
+    // }
 }
+
+// TEST_CASE("Scalar product", "[vectors]") {
+
+//     Vector3<float> u(1.0f);
+//     Vector3<float> v(1.0f);
+
+//     auto s = scalar_product(u, v);
+
+// }
 
 
 TEST_CASE("Vectors 3", "[vectors]") {

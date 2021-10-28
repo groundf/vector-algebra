@@ -9,5 +9,7 @@
 template <std::size_t N, std::size_t M, typename T>
 class Matrix
 {
-
+    /**
+     * Constructor
+     */
 };

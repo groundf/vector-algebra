@@ -8,11 +8,40 @@
 #include <array>
 #include <cstddef>
 #include <type_traits>
+#include <complex>
 
 namespace gof {
 
+//>> TODO MOve to standalone file
+
+#include <concepts>
+
+// Complex number guard.
+template <typename T>
+struct is_complex : std::false_type {};
+
+template <std::floating_point T>
+struct is_complex<std::complex<T>> : std::true_type {};
+
+/// Helper variable template
+template< class T >
+inline constexpr bool is_complex_v = is_complex<T>::value;
+
+/**
+ * The concept fo numeric types.
+ *
+ * This is useful for algebraic types such as vector and matrices.
+ */
+template <typename T>
+concept Number = std::is_arithmetic_v<T> || is_complex_v<T>;
+
+//<<
+
+
 /**
  * The vector template class.
+ *
+ * This type reprensets the vector embeded in Euclidean vector space.
  *
  * No more then four elements should be allowed.
  *
@@ -20,11 +49,9 @@ namespace gof {
  * @tparam T
  *
  */
-template <std::size_t N, typename T>
+template <std::size_t N, Number T>
 class Vector
 {
-    const std::array<T, N> _v;
-
   public:
 
     static constexpr std::size_t size = N;
@@ -71,13 +98,27 @@ class Vector
      */
     template <std::size_t Q = N, typename = std::enable_if_t<Q == 4>>
     constexpr T w() const noexcept { return _v[3]; }
+
+    // factory methods
+
+    // auto zero() -> Vector<N, T>   {  }
+
+    // auto unit_x() -> Vector<N, T> { }
+
+    // auto unit_y() -> Vector<N, T> { }
+
+    // auto unit_z() -> Vector<N, T> { }
+
+  private:
+
+    const std::array<T, N> _v;
 };
 
 
 /**
  * Binary operator `*`.
  */
-template <std::size_t N, typename T>
+template <std::size_t N, Number T>
 constexpr Vector<N, T> operator *(T const& factor, Vector<N, T> const& self) {
     // Conditional compilation with `constexpr if`.
     if constexpr(N == 1) {
@@ -94,18 +135,20 @@ constexpr Vector<N, T> operator *(T const& factor, Vector<N, T> const& self) {
     }
 }
 
+
 /**
  * Unary operator `-`.
  */
-template <std::size_t N, typename T>
+template <std::size_t N, Number T>
 constexpr Vector<N, T> operator -(Vector<N, T> const& self) {
     return (-T{1}) * self;
 }
 
+
 /**
  * Binary operator `+`.
  */
-template <std::size_t N, typename T>
+template <std::size_t N, Number T>
 constexpr Vector<N, T> operator +(Vector<N, T> const& self, Vector<N, T> const& that) {
     if constexpr(N == 1) {
         return {self.x() + that.x()};
@@ -121,13 +164,39 @@ constexpr Vector<N, T> operator +(Vector<N, T> const& self, Vector<N, T> const& 
     }
 }
 
+
 /**
  * Binary operator `-`.
  */
-template <std::size_t N, typename T>
+template <std::size_t N, Number T>
 constexpr Vector<N, T> operator -(Vector<N, T> const& self, Vector<N, T> const& that) {
     return self + ( (-T{1}) * that );
 }
+
+
+/**
+ * Calculate the scalar product of two vectors.
+ *
+ * @tparam N
+ * @tparam T
+ */
+template <std::size_t N, Number T = float>
+constexpr T scalar_product(const Vector<N, T>& lhs, const Vector<N, T>& rhs) {
+    return nullptr;
+}
+
+
+/**
+ * Calculate the vector product of two vectors.
+ *
+ * @tparam N
+ * @tparam T
+ */
+template <std::size_t N, Number T = float>
+constexpr Vector<N, T> vector_product(const Vector<N, T>& lhs, const Vector<N, T>& rhs) {
+    return nullptr;
+}
+
 
 constexpr auto plus(int a, int b) -> decltype(a) {
     return a + b;

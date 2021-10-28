@@ -6,9 +6,6 @@
 
 namespace gof {
 
-
-template <class T> concept integral = std::is_integral_v<T>;
-
 //!
 //! Vector 2 class compile-time (constexpr).
 //!
