@@ -11,47 +11,72 @@
 
 namespace gof {
 
-/// Vector class compile-time (constexpr).
-/// No more then four elements should be allowed.
+/**
+ * The vector template class.
+ *
+ * No more then four elements should be allowed.
+ *
+ * @tparam N
+ * @tparam T
+ *
+ */
 template <std::size_t N, typename T>
-class Vector {
-
+class Vector
+{
     const std::array<T, N> _v;
 
   public:
 
     static constexpr std::size_t size = N;
 
-    /// Constructor
+    /**
+     * Constructor
+     */
     Vector() = default;
 
-    /// Missing values will be filled with zeros.
+    /**
+     * Missing values will be filled with zeros.
+     */
     template <typename... Ts>
     constexpr Vector(const Ts &... xs) : _v({{xs...}}) { }
 
-    /// Return the value of component #1.
-    /// The method will be compiled only when the N >= 1.
+    /**
+     * Return the value of component #1.
+     *
+     * The method will be compiled only for N >= 1.
+     */
     template <std::size_t Q = N, typename = std::enable_if_t<Q >= 1>>
     constexpr T x() const noexcept { return _v[0]; }
 
-    /// Return the value of component #2.
-    /// The method will be compiled only when the N >= 2.
+    /**
+     * Return the value of component #2.
+     *
+     * The method will be compiled only for N >= 2.
+     */
     template <std::size_t Q = N, typename = std::enable_if_t<Q >= 2>>
     constexpr T y() const noexcept { return _v[1]; }
 
-    /// Return the value of component #3.
-    /// The method will be compiled only when the N >= 3.
+    /**
+     * Return the value of component #3.
+     *
+     * The method will be compiled only for N >= 3.
+     */
     template <std::size_t Q = N, typename = std::enable_if_t<Q >= 3>>
     constexpr T z() const noexcept { return _v[2]; }
 
-    /// Return the value of component #4.
-    /// The method will be compiled only when the N >= 4.
+    /**
+     * Return the value of component #4.
+     *
+     * The method will be compiled only for N >= 4.
+     */
     template <std::size_t Q = N, typename = std::enable_if_t<Q == 4>>
     constexpr T w() const noexcept { return _v[3]; }
 };
 
 
-/// Binary operator `*`.
+/**
+ * Binary operator `*`.
+ */
 template <std::size_t N, typename T>
 constexpr Vector<N, T> operator *(T const& factor, Vector<N, T> const& self) {
     // Conditional compilation with `constexpr if`.
@@ -69,13 +94,17 @@ constexpr Vector<N, T> operator *(T const& factor, Vector<N, T> const& self) {
     }
 }
 
-/// Unary operator `-`.
+/**
+ * Unary operator `-`.
+ */
 template <std::size_t N, typename T>
 constexpr Vector<N, T> operator -(Vector<N, T> const& self) {
     return (-T{1}) * self;
 }
 
-// Binary operator `+`.
+/**
+ * Binary operator `+`.
+ */
 template <std::size_t N, typename T>
 constexpr Vector<N, T> operator +(Vector<N, T> const& self, Vector<N, T> const& that) {
     if constexpr(N == 1) {
@@ -92,14 +121,15 @@ constexpr Vector<N, T> operator +(Vector<N, T> const& self, Vector<N, T> const& 
     }
 }
 
-// Binary operator `-`.
+/**
+ * Binary operator `-`.
+ */
 template <std::size_t N, typename T>
 constexpr Vector<N, T> operator -(Vector<N, T> const& self, Vector<N, T> const& that) {
     return self + ( (-T{1}) * that );
 }
 
-
-int plus(int a, int b) {
+constexpr auto plus(int a, int b) -> decltype(a) {
     return a + b;
 }
 
