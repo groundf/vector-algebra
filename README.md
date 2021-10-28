@@ -7,12 +7,26 @@ _The header-only C++ library for algebra used mostly in computer graphics algori
 
 The library currently live under `gof` (𝖌 ∘ 𝖋) namespace.
 
-```c++
+```cpp
+#include <gof/Types>
 
-#include <vector/Vector.hpp>
-
+using namespace gof;
 ```
 
+```cpp
+Vector2f v(1.0f, 3.0f);
+
+std::cout << v.x() << std::endl; // => 1.0f
+std::cout << v.y() << std::endl; // => 2.0f
+```
+
+```cpp
+Vector3f v(1.0f, 2.0f, 3.0f);
+
+std::cout << v.x() << std::endl; // => 1.0f
+std::cout << v.y() << std::endl; // => 2.0f
+std::cout << v.z() << std::endl; // => 3.0f
+```
 
 ## Roadmap
 
