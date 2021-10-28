@@ -1,7 +1,9 @@
+// -*- c++, utf-8 -*-
+
 #pragma once
 
-#include <vector/Vector.hpp>
-#include <matrix/Matrix.hpp>
+#include <gof/vector/Vector.hpp>
+#include <gof/matrix/Matrix.hpp>
 
 namespace gof {
 

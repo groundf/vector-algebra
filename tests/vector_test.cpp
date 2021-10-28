@@ -1,6 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include <vector/Types>
+#include <gof/Types>
 
 // #include <vector/simple/Vector2.hpp>
 // #include <vector/simple/Vector3.hpp>
