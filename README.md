@@ -1,16 +1,6 @@
-# Vector library
+# Vector algebra library
 
-The vector math header-only C++ library.
-
-## Execute
-
-    cmake -B build
-
-    cmake --build build
-
-    ctest -C debug --test-dir build
-or
-    ctest -C release --test-dir build --verbose
+_The header-only C++ library for algebra used mostly in computer graphics algorithm._
 
 ## Roadmap
 
@@ -39,6 +29,18 @@ or
   - [ ] `Color`
   - [ ] `Rotation`
 
+## Compilation
+
+This project uses CMake.
+
+    cmake -B build
+
+    cmake --build build
+
+    ctest -C debug --test-dir build
+or
+    ctest -C release --test-dir build --verbose
+
 ## Questions
 
 - Should we implement expression templates?
@@ -46,7 +48,7 @@ or
 
 ## Notes & Guide
 
-- Vector SHOULD implement the constructor which populates vector with the same value.
+- Vector SHOULD implement the constructor populating the vector with the same value.
 
   ```
   Vector2f v(1.0) -> v(1.0, 1.0)
