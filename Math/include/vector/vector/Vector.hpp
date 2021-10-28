@@ -137,6 +137,34 @@ constexpr Vector<N, T> operator *(T const& factor, Vector<N, T> const& self) {
 
 
 /**
+ * == operator
+ */
+template <std::size_t N, Number T>
+constexpr bool operator ==(const Vector<N, T>& self, const Vector<N, T>& that) noexcept {
+    if constexpr(N == 1) {
+        return self.x() == that.x();
+    }
+    if constexpr(N == 2) {
+        return self.x() == that.x() && self.y() == that.y();
+    }
+    if constexpr(N == 3) {
+        return self.x() == that.x() && self.y() == that.y() && self.z() == that.z();
+    }
+    if constexpr(N == 4) {
+        return self.x() == that.x() && self.y() == that.y() && self.z() == that.z() && self.w() == that.w();
+    }
+}
+
+/**
+ *  != operator
+ */
+template <std::size_t N, Number T>
+constexpr  bool operator !=(const Vector<N, T>& self, const Vector<N, T>& that) noexcept {
+  return ! (self == that);
+}
+
+
+/**
  * Unary operator `-`.
  */
 template <std::size_t N, Number T>
@@ -201,7 +229,6 @@ constexpr Vector<N, T> vector_product(const Vector<N, T>& lhs, const Vector<N, T
 constexpr auto plus(int a, int b) -> decltype(a) {
     return a + b;
 }
-
 
 } // namespace
 

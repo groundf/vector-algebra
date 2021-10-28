@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Vector.hpp"
+#include <vector/Vector.hpp>
+#include <matrix/Matrix.hpp>
 
 namespace gof {
 

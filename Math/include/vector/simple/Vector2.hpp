@@ -34,19 +34,19 @@ class Vector2 {
 
 //-----------------------------------------------------------------------------
 
-template <typename T> inline
+template <typename T>
 constexpr bool operator ==(const Vector2<T>& self, const Vector2<T>& that) noexcept {
   return self.x() == that.x() && self.y() == that.y();
 }
 
 
-template <typename T> inline
+template <typename T>
 constexpr bool operator !=(const Vector2<T>& self, const Vector2<T>& that) noexcept {
   return ! (self == that);
 }
 
 
-template <typename T> inline
+template <typename T>
 constexpr Vector2<T> operator *(const T& scalar, const Vector2<T>& self) noexcept {
   return { scalar * self.x(), scalar * self.y() };
 }

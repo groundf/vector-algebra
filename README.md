@@ -2,6 +2,18 @@
 
 _The header-only C++ library for algebra used mostly in computer graphics algorithm._
 
+
+## Usage
+
+The library currently live under `gof` (𝖌 ∘ 𝖋) namespace.
+
+```c++
+
+#include <vector/Vector.hpp>
+
+```
+
+
 ## Roadmap
 
 - Implement basic algeabric types:
