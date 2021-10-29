@@ -10,38 +10,14 @@
 #include <type_traits>
 #include <complex>
 
+#include <gof/common.hpp>
+
 namespace gof {
-
-//>> TODO MOve to standalone file
-
-#include <concepts>
-
-// Complex number guard.
-template <typename T>
-struct is_complex : std::false_type {};
-
-template <std::floating_point T>
-struct is_complex<std::complex<T>> : std::true_type {};
-
-/// Helper variable template
-template< class T >
-inline constexpr bool is_complex_v = is_complex<T>::value;
-
-/**
- * The concept fo numeric types.
- *
- * This is useful for algebraic types such as vector and matrices.
- */
-template <typename T>
-concept Number = std::is_arithmetic_v<T> || is_complex_v<T>;
-
-//<<
-
 
 /**
  * The vector template class.
  *
- * This type reprensets the vector embeded in Euclidean vector space.
+ * This type represents the vector embeded in Euclidean vector space.
  *
  * No more then four elements should be allowed.
  *
@@ -52,6 +28,8 @@ concept Number = std::is_arithmetic_v<T> || is_complex_v<T>;
 template <std::size_t N, Number T>
 class Vector
 {
+    using self = Vector<N, T>;
+
   public:
 
     static constexpr std::size_t size = N;
@@ -99,21 +77,77 @@ class Vector
     template <std::size_t Q = N, typename = std::enable_if_t<Q == 4>>
     constexpr T w() const noexcept { return _v[3]; }
 
-    // factory methods
+    constexpr std::array<T, N> values() const noexcept {
+        return _v;
+    }
 
-    // auto zero() -> Vector<N, T>   {  }
+    /**
+     *  Check if it is a zero vector.
+     */
+    template <typename Vector>
+    constexpr bool is_zero() {
+        for (const auto &e : *this->values()) {
+            if (e != 0.0f) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-    // auto unit_x() -> Vector<N, T> { }
+    // flip
 
-    // auto unit_y() -> Vector<N, T> { }
+    // rotate90
 
-    // auto unit_z() -> Vector<N, T> { }
+    // rotate45
+
+    //-- factory methods
+
+    /**
+     * Return the zero vector.
+     */
+    constexpr static auto zero() -> Vector<N, T> {
+        return {T{0}};
+    }
+
+    /**
+     * Return the unit vector in direction `x`.
+     *
+     * This will compile only for N >= 1.
+     */
+    constexpr static auto unit_x() -> Vector<N, T> {
+        return {T{1}};
+    }
+
+    /**
+     * Return the unit vector in direction `y`.
+     *
+     * This will compile only for N >= 2.
+     */
+    constexpr static auto unit_y() -> Vector<N, T> {
+        return {T{0}, T{1}};
+    }
+
+    /**
+     * Return the unit vector in direction `z`.
+     *
+     * This will compile only for N >= 3.
+     */
+    constexpr static auto unit_z() -> Vector<N, T> {
+        return {T{0}, T{0}, T{1}};
+    }
+
+    constexpr static auto ones() -> Vector<N, T> {
+        if constexpr(N == 1) { return {T{1}}; }
+        if constexpr(N == 2) { return {T{1}, T{1}}; }
+        if constexpr(N == 3) { return {T{1}, T{1}, T{1}}; }
+    }
 
   private:
 
     const std::array<T, N> _v;
 };
 
+/*----------------------------------------------------------------------------*/
 
 /**
  * Binary operator `*`.

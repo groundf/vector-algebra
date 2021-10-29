@@ -3,6 +3,9 @@
 _The header-only C++ library for algebra used mostly in computer graphics algorithm._
 
 
+__This library is not object oriented by design.__
+
+
 ## Usage
 
 The library currently live under `gof` (𝖌 ∘ 𝖋) namespace.

@@ -57,6 +57,37 @@ TEST_CASE("Vector N", "[vector n]")
         REQUIRE(w.y() == 0.0f);
     };
 
+    // static factory methods
+
+    SECTION("zero vector") {
+        Vector2f u(0.0f, 0.0f);
+        auto v = Vector2f::zero();
+        REQUIRE(u == v);
+    }
+
+    SECTION("unit x"){
+        Vector3f u(1.0f);
+        auto v = Vector3f::unit_x();
+        REQUIRE(u == v);
+    }
+
+    SECTION("unit y"){
+        Vector3f u(0.0f, 1.0f);
+        auto v = Vector3f::unit_y();
+        REQUIRE(u == v);
+    }
+
+    SECTION("unit z"){
+        Vector3f u(0.0f, 0.0f, 1.0f);
+        auto v = Vector3f::unit_z();
+        REQUIRE(u == v);
+    }
+
+    SECTION("unit z"){
+        Vector3f u(1.0f, 1.0f, 1.0f);
+        auto v = Vector3f::ones();
+        REQUIRE(u == v);
+    }
 }
 
 TEST_CASE("Vector operators N = 3", "[vectors 3]")
