@@ -150,13 +150,19 @@ class Vector
     // auto rotate_45_cc const { }
     // auto rotate_45_ccw const { }
 
-    // constexpr bool is_opposite(Vector<N, T> const& that) { }
-
-    // constexpr bool is_perpendicular() const noexcept { }
-
     // constexpr bool is_unit() const noexcept { return norm(self) == T{1}; }
 
-    // constexpr bool has_all_values_equal(T tolerance) { }
+    // constexpr bool is_opposite(Vector<N, T> const& that) { }
+
+    // constexpr bool is_parallel(that) const noexcept { }
+
+    // constexpr bool is_perpendicular(that) const noexcept { }
+
+
+    /**
+     * Whenever has all values equal with specified tolerance.
+     */
+    // constexpr is_uniform(T tolerance) { }
 
     // constexpr T max_value() const noexcept { }
 
@@ -284,6 +290,7 @@ constexpr Vector<N, T> operator -(Vector<N, T> const& self) {
     return (-T{1}) * self;
 }
 
+
 /**
  * The binary operator `+`.
  */
@@ -304,11 +311,19 @@ constexpr Vector<N, T> operator +(Vector<N, T> const& self, Vector<N, T> const& 
 }
 
 /**
- * The binary operator `-`.
+ * The binary operator `vector - vec`.
  */
 template <std::size_t N, Number T>
 constexpr Vector<N, T> operator -(Vector<N, T> const& self, Vector<N, T> const& that) {
     return self + ( (-T{1}) * that );
+}
+
+/**
+ * The binary operator `vector - scalar`.
+ */
+template <std::size_t N, Number T>
+constexpr Vector<N, T> operator -(Vector<N, T> const& self, T const& bias) {
+    return self - (bias * Vector<N, T>::ones());
 }
 
 /**
