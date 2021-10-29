@@ -87,7 +87,7 @@ ctest -C release --test-dir build --verbose
 
 ## Questions
 
-- Should we implement expression templates?
+- Should we implement expression templates https://en.wikipedia.org/wiki/Expression_templates?
 - How to effectively use C++ concepts?
 - Use header files without extension for interface see https://stackoverflow.com/questions/40624930/c-header-files-with-no-extension
   e.g `Types` header is without suffix and it imports `Vector.hpp` and `Matrix.hpp` headers. This is similar to Haskell lib approach.
