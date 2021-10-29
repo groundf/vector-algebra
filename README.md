@@ -1,14 +1,10 @@
 # Vector algebra library
 
-_The header-only C++ library for algebra used mostly in computer graphics algorithm._
-
-
-__This library is not object oriented by design.__
-
+_The header-only C++ vector algebra library used in computer graphics._
 
 ## Usage
 
-The library currently live under `gof` (𝖌 ∘ 𝖋) namespace.
+The library currently live under 𝖌 ∘ 𝖋 namespace.
 
 ```cpp
 #include <gof/Types>
@@ -46,8 +42,8 @@ std::cout << v.z() << std::endl; // => 3.0f
     - [x] `unit_x` factory method
     - [x] `unit_y` factory method
     - [x] `unit_z` factory method
-    - [x] `unit_w` facotry method.
-    - - [ ] Let vector be iterable with range based loop.
+    - [x] `unit_w` factory method
+    - [ ] Let vector be iterable with range based loop.
   - [ ] The `Matrix<N, M, T>` template class and its specialized versions (aliases) e.g
     - [ ] `Matrix2f = Matrix<2, 2, float>`,
     - [ ] `Matrix3f = Matrix<3, 3, float>`,
@@ -62,14 +58,18 @@ std::cout << v.z() << std::endl; // => 3.0f
 ## Compilation
 
 This project uses CMake.
-``
-    cmake -B build
 
-    cmake --build build
+```
+cmake -B build
 
-    ctest -C debug --test-dir build
+cmake --build build
+
+ctest -C debug --test-dir build
+
 or
-    ctest -C release --test-dir build --verbose
+
+ctest -C release --test-dir build --verbose
+```
 
 ## Development
 

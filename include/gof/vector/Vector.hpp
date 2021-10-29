@@ -1,7 +1,8 @@
 /**
  * @mainpage CGV Library
- * @section intro_sec Introduction
- * This is the CGV C++ library.
+ * @section This library deals with basic algebra types often used in computer graphics
+ * or simulation in 3D Euclidean space
+ *
  * @section install_sec Installation
  *
  * @subsection install_dependencies Installing Dependencies
@@ -46,9 +47,6 @@ class Vector
 {
     using self = Vector<N, T>;
 
-    /**
-     * Constructor
-     */
     Vector() = delete;
 
   public:
@@ -56,6 +54,8 @@ class Vector
     static constexpr std::size_t size = N;
 
     /**
+     * Construct a new vector.
+     *
      * Missing values will be filled with zeros.
      */
     template <typename... Ts>
@@ -113,8 +113,9 @@ class Vector
      * Calculate the Euclidean norm.
      *
      *  $|x| = \sum_{i=1}^n \sqrt{x_i^2}$
+     *
+     * Also known as _length_ or _magnitude_.
      */
-     // length // magnitude
     constexpr T norm() const noexcept {
         auto result = T{0};
         for(const auto &e : *this->values()) {
@@ -138,14 +139,14 @@ class Vector
     //-- factory methods
 
     /**
-     * Return the zero vector.
+     * Return the zero vector i.e. it has all components set to zero.
      */
     constexpr static auto zero() -> Vector<N, T> {
         return {T{0}};
     }
 
     /**
-     * Return the unit vector in direction `x`.
+     * Return the vector with unit `x` component i.e. the unit vector in direction `x`.
      *
      * This will compile only for N >= 1.
      */
@@ -154,7 +155,7 @@ class Vector
     }
 
     /**
-     * Return the unit vector in direction `y`.
+     * Return the vector with unit `y` component i.e. the unit vector in direction `y`.
      *
      * This will compile only for N >= 2.
      */
@@ -163,7 +164,7 @@ class Vector
     }
 
     /**
-     * Return the unit vector in direction `z`.
+     * Return the vector with unit `z` component i.e. the unit vector in direction `z`.
      *
      * This will compile only for N >= 3.
      */
@@ -171,6 +172,18 @@ class Vector
         return {T{0}, T{0}, T{1}};
     }
 
+    /**
+     * Return the vector with unit `w` component.
+     *
+     * This will compile only for N >= 4.
+     */
+    constexpr static auto unit_w() -> Vector<N, T> {
+        return {T{0}, T{0}, T{0}, T{1}};
+    }
+
+    /**
+     * Return the vector with all components set to one.
+     */
     constexpr static auto ones() -> Vector<N, T> {
         if constexpr(N == 1) {
             return {T{1}};
@@ -191,7 +204,7 @@ class Vector
 /*----------------------------------------------------------------------------*/
 
 /**
- * Binary operator `*`.
+ * The binary operator `*`.
  */
 template <std::size_t N, Number T>
 constexpr Vector<N, T> operator *(T const& factor, Vector<N, T> const& self) {
@@ -212,7 +225,7 @@ constexpr Vector<N, T> operator *(T const& factor, Vector<N, T> const& self) {
 
 
 /**
- * == operator
+ * The binary operator `==`.
  */
 template <std::size_t N, Number T>
 constexpr bool operator ==(const Vector<N, T>& self, const Vector<N, T>& that) noexcept {
@@ -231,7 +244,7 @@ constexpr bool operator ==(const Vector<N, T>& self, const Vector<N, T>& that) n
 }
 
 /**
- *  != operator
+ * The binary operator `!=`.
  */
 template <std::size_t N, Number T>
 constexpr  bool operator !=(const Vector<N, T>& self, const Vector<N, T>& that) noexcept {
@@ -240,7 +253,7 @@ constexpr  bool operator !=(const Vector<N, T>& self, const Vector<N, T>& that) 
 
 
 /**
- * Unary operator `-`.
+ * The unary operator `-`.
  */
 template <std::size_t N, Number T>
 constexpr Vector<N, T> operator -(Vector<N, T> const& self) {
@@ -249,7 +262,7 @@ constexpr Vector<N, T> operator -(Vector<N, T> const& self) {
 
 
 /**
- * Binary operator `+`.
+ * The binary operator `+`.
  */
 template <std::size_t N, Number T>
 constexpr Vector<N, T> operator +(Vector<N, T> const& self, Vector<N, T> const& that) {
@@ -269,7 +282,7 @@ constexpr Vector<N, T> operator +(Vector<N, T> const& self, Vector<N, T> const& 
 
 
 /**
- * Binary operator `-`.
+ * The binary operator `-`.
  */
 template <std::size_t N, Number T>
 constexpr Vector<N, T> operator -(Vector<N, T> const& self, Vector<N, T> const& that) {
