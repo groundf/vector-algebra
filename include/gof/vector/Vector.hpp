@@ -32,11 +32,11 @@ namespace gof {
 /**
  * The vector template class.
  *
- *  $\vec{u} + \vec{v}$
- *
- * This type represents the vector embeded in Euclidean vector space.
+ * This type represents the immutable vector type embeded in Euclidean vector space.
  *
  * No more then four elements should be allowed.
+ *
+ *  $\vec{u} + \vec{v}$
  *
  * @tparam N
  * @tparam T
@@ -54,7 +54,7 @@ class Vector
     static constexpr std::size_t size = N;
 
     /**
-     * Construct a new vector.
+     * Constructor initializing all components to a single value of type `T`.
      *
      * Missing values will be filled with zeros.
      */
@@ -98,7 +98,7 @@ class Vector
     }
 
     /**
-     *  Check if this is a zero vector.
+     * Check if this is a zero vector.
      */
     template <typename Vector>
     constexpr bool is_zero() {
@@ -112,7 +112,7 @@ class Vector
     /**
      * Calculate the Euclidean norm.
      *
-     *  $|x| = \sum_{i=1}^n \sqrt{x_i^2}$
+     * $|x| = \sum_{i=1}^n \sqrt{x_i^2}$
      *
      * Also known as _length_ or _magnitude_.
      */
@@ -124,19 +124,45 @@ class Vector
         return std::sqrt(result);
     }
 
+    // reject()
+    // project()
+
     // flip
 
-    // rotate90
+    // rotate(axis, angle) { }
 
-    // rotate45
+    // rotate_90_cc(axis) {  }
 
-    // is_opposite()
+    // rotate_x_90_cc(axis) {  }
 
-    // is_perpendicular()
+    // rotate_y_90_cc(axis) {  }
 
-    // is_unit() { return norm(self) == T{1}; }
+    // rotate_z_90_cc(axis) {  }
 
-    //-- factory methods
+    // rotate_90_ccw(axis) { }
+
+    // rotate_x_90_ccw(axis) { }
+
+    // rotate_y_90_ccw(axis) { }
+
+    // rotate_z_90_ccw(axis) { }
+
+    // auto rotate_45_cc const { }
+    // auto rotate_45_ccw const { }
+
+    // constexpr bool is_opposite(Vector<N, T> const& that) { }
+
+    // constexpr bool is_perpendicular() const noexcept { }
+
+    // constexpr bool is_unit() const noexcept { return norm(self) == T{1}; }
+
+    // constexpr bool has_all_values_equal(T tolerance) { }
+
+    // constexpr T max_value() const noexcept { }
+
+    // constexpr T min_value() const noexcept { }
+
+    /*--- STATIC FACTORY METHODS ---*/
 
     /**
      * Return the zero vector i.e. it has all components set to zero.
@@ -223,7 +249,6 @@ constexpr Vector<N, T> operator *(T const& factor, Vector<N, T> const& self) {
     }
 }
 
-
 /**
  * The binary operator `==`.
  */
@@ -251,7 +276,6 @@ constexpr  bool operator !=(const Vector<N, T>& self, const Vector<N, T>& that) 
   return ! (self == that);
 }
 
-
 /**
  * The unary operator `-`.
  */
@@ -259,7 +283,6 @@ template <std::size_t N, Number T>
 constexpr Vector<N, T> operator -(Vector<N, T> const& self) {
     return (-T{1}) * self;
 }
-
 
 /**
  * The binary operator `+`.
@@ -280,7 +303,6 @@ constexpr Vector<N, T> operator +(Vector<N, T> const& self, Vector<N, T> const& 
     }
 }
 
-
 /**
  * The binary operator `-`.
  */
@@ -288,7 +310,6 @@ template <std::size_t N, Number T>
 constexpr Vector<N, T> operator -(Vector<N, T> const& self, Vector<N, T> const& that) {
     return self + ( (-T{1}) * that );
 }
-
 
 /**
  * Calculate the scalar product of two vectors.
@@ -301,7 +322,6 @@ constexpr T scalar_product(const Vector<N, T>& lhs, const Vector<N, T>& rhs) {
     return nullptr;
 }
 
-
 /**
  * Calculate the vector product of two vectors.
  *
@@ -313,11 +333,10 @@ constexpr Vector<N, T> vector_product(const Vector<N, T>& lhs, const Vector<N, T
     return nullptr;
 }
 
-
 constexpr auto plus(int a, int b) -> decltype(a) {
     return a + b;
 }
 
 } // namespace
 
-#endif
+#endif // guard

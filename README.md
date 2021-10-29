@@ -37,12 +37,19 @@ std::cout << v.z() << std::endl; // => 3.0f
     - [x] `s * v` v ∈ V, s is scalar
     - [x] `u + v` u, v ∈ V
     - [x] `u - v` u, v ∈ V
-    - [x] `ones` factory method
-    - [x] `zero` factory method
-    - [x] `unit_x` factory method
-    - [x] `unit_y` factory method
-    - [x] `unit_z` factory method
-    - [x] `unit_w` factory method
+    - [x] `ones()` factory method
+    - [x] `zero()` factory method
+    - [x] `unit_x()` factory method
+    - [x] `unit_y()` factory method
+    - [x] `unit_z()` factory method
+    - [x] `unit_w()` factory method
+    - [ ] `flip()`
+    - [ ] `scale()`
+    - [ ] `is_opposite(to)`
+    - [ ] `rotate(angle, axis)` rotate vector by `angle` around `axis`
+    - [ ] `rotate_90_cw(axis)` clock-wise
+    - [ ] `rotate_90_ccw(axis)` counter-clock-wise
+    - [ ] ``
     - [ ] Let vector be iterable with range based loop.
   - [ ] The `Matrix<N, M, T>` template class and its specialized versions (aliases) e.g
     - [ ] `Matrix2f = Matrix<2, 2, float>`,
@@ -75,6 +82,8 @@ ctest -C release --test-dir build --verbose
 
 - Compilation via [CMake](https://cmake.org/).
 - Documentation via [Doxygen](https://www.doxygen.nl/).
+- Formatting via clang-format
+- Linting via ???
 
 ## Questions
 
@@ -108,3 +117,28 @@ ctest -C release --test-dir build --verbose
 - https://www.gamedev.net/blogs/entry/2265481-oop-is-dead-long-live-oop/
 - https://www.sandordargo.com/blog/2021/02/24/cpp-concepts-with-classes
 - https://subscription.packtpub.com/book/programming/9781786465184/1/ch01lvl1sec13/enabling-range-based-for-loops-for-custom-types
+
+- https://docs.unrealengine.com/4.27/en-US/API/Runtime/Core/Math/FVector/
+
+
+### Engines
+
+#### The open-source game engines
+
+CryEngine
+- https://github.com/CRYTEK/CRYENGINE
+- Far Cry, Kingdom Come: Deliverance, and Crysis.
+
+Ureal Engine
+- https://www.unrealengine.com/
+- https://www.unrealengine.com/en-US/ue4-on-github
+
+
+#### The close-source game engines
+
+Decima
+- https://en.wikipedia.org/wiki/Decima_(game_engine)
+- https://www.guerrilla-games.com/read/decima
+
+
+_Programming in C++ is a true art because it is so subjective._
