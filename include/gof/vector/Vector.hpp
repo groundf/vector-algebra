@@ -1,3 +1,17 @@
+/**
+ * @mainpage CGV Library
+ * @section intro_sec Introduction
+ * This is the CGV C++ library.
+ * @section install_sec Installation
+ *
+ * @subsection install_dependencies Installing Dependencies
+ * Do somethings ...
+ * @subsection install_library Installing Library
+ * Do somethings ...
+ * @subsection install_example Installing Examples
+ * Do somethings ...
+ */
+
 #pragma once
 
 #ifndef VECTOR_HEADER_LIBRARY
@@ -17,6 +31,8 @@ namespace gof {
 /**
  * The vector template class.
  *
+ *  $\vec{u} + \vec{v}$
+ *
  * This type represents the vector embeded in Euclidean vector space.
  *
  * No more then four elements should be allowed.
@@ -30,14 +46,14 @@ class Vector
 {
     using self = Vector<N, T>;
 
-  public:
-
-    static constexpr std::size_t size = N;
-
     /**
      * Constructor
      */
-    Vector() = default;
+    Vector() = delete;
+
+  public:
+
+    static constexpr std::size_t size = N;
 
     /**
      * Missing values will be filled with zeros.
@@ -82,7 +98,7 @@ class Vector
     }
 
     /**
-     *  Check if it is a zero vector.
+     *  Check if this is a zero vector.
      */
     template <typename Vector>
     constexpr bool is_zero() {
@@ -91,7 +107,20 @@ class Vector
                 return false;
             }
         }
-        return true;
+    }
+
+    /**
+     * Calculate the Euclidean norm.
+     *
+     *  $|x| = \sum_{i=1}^n \sqrt{x_i^2}$
+     */
+     // length // magnitude
+    constexpr T norm() const noexcept {
+        auto result = T{0};
+        for(const auto &e : *this->values()) {
+            result += (e * e);
+        }
+        return std::sqrt(result);
     }
 
     // flip
@@ -99,6 +128,12 @@ class Vector
     // rotate90
 
     // rotate45
+
+    // is_opposite()
+
+    // is_perpendicular()
+
+    // is_unit() { return norm(self) == T{1}; }
 
     //-- factory methods
 
@@ -137,9 +172,15 @@ class Vector
     }
 
     constexpr static auto ones() -> Vector<N, T> {
-        if constexpr(N == 1) { return {T{1}}; }
-        if constexpr(N == 2) { return {T{1}, T{1}}; }
-        if constexpr(N == 3) { return {T{1}, T{1}, T{1}}; }
+        if constexpr(N == 1) {
+            return {T{1}};
+        }
+        if constexpr(N == 2) {
+            return {T{1}, T{1}};
+         }
+        if constexpr(N == 3) {
+             return {T{1}, T{1}, T{1}};
+         }
     }
 
   private:

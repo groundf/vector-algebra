@@ -45,3 +45,6 @@ CTestTestfile.cmake
 _deps
 
 build/
+
+docs/html
+docs/latex

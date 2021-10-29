@@ -41,12 +41,13 @@ std::cout << v.z() << std::endl; // => 3.0f
     - [x] `s * v` v ∈ V, s is scalar
     - [x] `u + v` u, v ∈ V
     - [x] `u - v` u, v ∈ V
-    - [ ] `one` factory method
-    - [ ] `zero` factory method
-    - [ ] `unit_x` factory method
-    - [ ] `unit_y` factory method
-    - [ ] `unit_z` factory method
-    - [ ] Let vector be iterable with range based loop.
+    - [x] `ones` factory method
+    - [x] `zero` factory method
+    - [x] `unit_x` factory method
+    - [x] `unit_y` factory method
+    - [x] `unit_z` factory method
+    - [x] `unit_w` facotry method.
+    - - [ ] Let vector be iterable with range based loop.
   - [ ] The `Matrix<N, M, T>` template class and its specialized versions (aliases) e.g
     - [ ] `Matrix2f = Matrix<2, 2, float>`,
     - [ ] `Matrix3f = Matrix<3, 3, float>`,
@@ -61,7 +62,7 @@ std::cout << v.z() << std::endl; // => 3.0f
 ## Compilation
 
 This project uses CMake.
-
+``
     cmake -B build
 
     cmake --build build
@@ -69,6 +70,11 @@ This project uses CMake.
     ctest -C debug --test-dir build
 or
     ctest -C release --test-dir build --verbose
+
+## Development
+
+- Compilation via [CMake](https://cmake.org/).
+- Documentation via [Doxygen](https://www.doxygen.nl/).
 
 ## Questions
 
