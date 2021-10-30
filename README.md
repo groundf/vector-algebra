@@ -7,7 +7,7 @@ _The header-only C++ vector algebra library used in computer graphics._
 The library currently live under 𝖌 ∘ 𝖋 namespace.
 
 ```cpp
-#include <gof/Types>
+#include <gof/types>
 
 using namespace gof;
 ```
