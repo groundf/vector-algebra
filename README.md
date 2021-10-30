@@ -44,7 +44,7 @@ std::cout << v.z() << std::endl; // => 3.0f
     - [x] `unit_z()` factory method
     - [x] `unit_w()` factory method
     - [ ] `flip()`
-    - [ ] `scale(factor)` aka `s * v`
+    - [x] `scale(factor)` aka `s * v`
     - [ ] `is_opposite(to)`
     - [ ] `rotate(angle, axis)` rotate vector by `angle` around `axis`
     - [ ] `rotate_90_cw(axis)` clock-wise

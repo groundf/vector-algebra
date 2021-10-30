@@ -44,7 +44,7 @@ SCENARIO("Vector accessors works", "[vector]")
     }
 }
 
-SCENARIO("Vector factory methods works", "[vector]")
+SCENARIO("Vector factories works", "[vector]")
 {
     GIVEN("A vectors with N = 2 components")
     {
@@ -122,7 +122,7 @@ SCENARIO("Vector factory methods works", "[vector]")
     }
 }
 
-SCENARIO("Vector equality operators works", "[vector]")
+SCENARIO("Vector equality works", "[vector]")
 {
     GIVEN("A vectors with N = 2 components")
     {
@@ -166,7 +166,7 @@ SCENARIO("Vector equality operators works", "[vector]")
     }
 }
 
-SCENARIO("Vector arithmetic operators works", "[vector]")
+SCENARIO("Vector arithmetic works", "[vector]")
 {
     GIVEN("A vectors with N = 2 components")
     {
@@ -194,6 +194,7 @@ SCENARIO("Vector arithmetic operators works", "[vector]")
         WHEN("we multiply vector with zero") {
             THEN("we get the zero vector") {
                 REQUIRE( (0.0f * v) == Vector2f::zero());
+                REQUIRE(u.scale(0.0f) == Vector2f::zero());
             }
         }
 
@@ -230,6 +231,7 @@ SCENARIO("Vector arithmetic operators works", "[vector]")
         WHEN("we multiply vector with zero") {
             THEN("we get the zero vector") {
                 REQUIRE( (0.0f * u) == Vector3f::zero());
+                REQUIRE(u.scale(0.0f) == Vector3f::zero());
             }
         }
 
