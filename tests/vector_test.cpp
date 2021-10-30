@@ -6,25 +6,47 @@
 using namespace gof;
 
 
-SCENARIO("Vector accessors are well defined",  "[vector]")
+SCENARIO("Vector accessors works", "[vector]")
 {
-    GIVEN("A vector class with N = 2 components")
+    GIVEN("A vectors with N = 2 components")
     {
         Vector2f v(1.0f);
 
         WHEN("A vector is created")
         {
-            THEN("it has set a `x` and `y` property") {
+            THEN("we can access `x` and `y` component") {
                 REQUIRE(v.x() == 1.0);
                 REQUIRE(v.y() == 0.0);
+            }
+            THEN("the size is correct") {
+                REQUIRE(v.size == 2);         // object access
+                REQUIRE(Vector2f::size == 2); // class access
+            }
+        }
+    }
+
+    GIVEN("A vectors with N = 3 components")
+    {
+        Vector3f v(1.0f);
+
+        WHEN("A vector is created")
+        {
+            THEN("we can access `x`, `y` and `z` component") {
+                REQUIRE(v.x() == 1.0);
+                REQUIRE(v.y() == 0.0);
+                REQUIRE(v.z() == 0.0);
+            }
+            THEN("the size is correct") {
+                REQUIRE(v.size == 3);         // object access
+                REQUIRE(Vector3f::size == 3); // class access
             }
         }
     }
 }
 
-SCENARIO("Vector is created with factory method", "[vector]")
+SCENARIO("Vector factory methods works", "[vector]")
 {
-    GIVEN("A vector class with N = 2 components")
+    GIVEN("A vectors with N = 2 components")
     {
         WHEN("the unit `x` vector is created")
         {
@@ -54,7 +76,8 @@ SCENARIO("Vector is created with factory method", "[vector]")
             }
         }
     }
-    GIVEN("A vector class with N = 3 components")
+
+    GIVEN("A vectors with N = 3 components")
     {
         WHEN("the unit `x` vector is created")
         {
@@ -99,7 +122,7 @@ SCENARIO("Vector is created with factory method", "[vector]")
     }
 }
 
-SCENARIO("Vector equality operators are well defined", "[vector]")
+SCENARIO("Vector equality operators works", "[vector]")
 {
     GIVEN("A vectors with N = 2 components")
     {
@@ -143,78 +166,79 @@ SCENARIO("Vector equality operators are well defined", "[vector]")
     }
 }
 
-
-// REQUIRE( (1.0f * v) == v);
-
-
-TEST_CASE("Vector N", "[vector2d]")
+SCENARIO("Vector arithmetic operators works", "[vector]")
 {
-    Vector2f u(1.0f);
+    GIVEN("A vectors with N = 2 components")
+    {
+        Vector2f u(1.0f, 2.0f);
+        Vector2f v(-1.0f, -2.0f);
 
+        WHEN("we add two opposite vectors") {
+            THEN("we get the zero vector") {
+                REQUIRE((u + v) == Vector2f::zero());
+            }
+        }
 
-    SECTION("2") {
-        Vector2f u(1.0f, 1.0f);
-        REQUIRE(u.x() == 1.0f);
-        REQUIRE(u.y() == 1.0f);
+        WHEN("we subtract two equal vectors") {
+            THEN("we get the zero vector") {
+                REQUIRE((v - v) == Vector2f::zero());
+            }
+        }
+
+        WHEN("we multiply vector with one") {
+            THEN("we get the same vector") {
+                REQUIRE( (1.0f * v) == v);
+            }
+        }
+
+        WHEN("we multiply vector with zero") {
+            THEN("we get the zero vector") {
+                REQUIRE( (0.0f * v) == Vector2f::zero());
+            }
+        }
+
+        WHEN("we negate vector with unary operator") {
+            THEN("we get an opposite vector") {
+                REQUIRE(-u == v);
+            }
+        }
     }
 
-    SECTION("3") {
-        Vector2f u(1.0f);
-        REQUIRE(u.size == 2);         // object access
-        REQUIRE(Vector2f::size == 2); // class access
+    GIVEN("A vectors with N = 3 components")
+    {
+        Vector3f u(1.0f, 2.0f, 3.0f);
+        Vector3f v(-1.0f, -2.0f, -3.0f);
+
+        WHEN("we add two opposite vectors") {
+            THEN("we get the zero vector") {
+                REQUIRE((u + v) == Vector3f::zero());
+            }
+        }
+
+        WHEN("we subtract two equal vectors") {
+            THEN("we get the zero vector") {
+                REQUIRE((u - u) == Vector3f::zero());
+            }
+        }
+
+        WHEN("we multiply vector with one") {
+            THEN("we get the same vector") {
+                REQUIRE( (1.0f * u) == u);
+            }
+        }
+
+        WHEN("we multiply vector with zero") {
+            THEN("we get the zero vector") {
+                REQUIRE( (0.0f * u) == Vector3f::zero());
+            }
+        }
+
+        WHEN("we negate vector with unary operator") {
+            THEN("we get an opposite vector") {
+                REQUIRE(-u == v);
+            }
+        }
     }
-
-    SECTION("4") {
-        Vector2f v(1.0f, 2.0f);
-        REQUIRE(v.x() == 1.0f);
-        REQUIRE(v.y() == 2.0f);
-    };
-
-    SECTION("unary operator -") {
-        Vector2f u(1.0f, 2.0f);
-        auto v = -u;
-        REQUIRE(v.x() == -1.0f);
-        REQUIRE(v.y() == -2.0f);
-    };
-
-    SECTION("binary operator +") {
-        Vector2f u(1.0f, 2.0f);
-        Vector2f v(2.0f, 1.0f);
-        auto w = u + v;
-        REQUIRE(w.x() == 3.0f);
-        REQUIRE(w.y() == 3.0f);
-    };
-
-    SECTION("binary operator -") {
-        Vector2f u(1.0f, 2.0f);
-        Vector2f v(1.0f, 2.0f);
-        auto w = u - v;
-        REQUIRE(w.x() == 0.0f);
-        REQUIRE(w.y() == 0.0f);
-    };
 }
 
-
-TEST_CASE("vector operators N = 2", "[vectors 2]")
-{
-    Vector2f u(1.0f, 2.0f);
-    Vector2f v(3.0f, 2.0f);
-
-    SECTION("== operator") {
-        REQUIRE(v == v);
-    }
-
-    SECTION("!= operator") {
-        REQUIRE(u != v);
-    }
-
-    SECTION("* operator") {
-        REQUIRE( (1.0f * v) == v);
-    }
-
-    SECTION("constructor") {
-        Vector2f w(1.0f);
-        REQUIRE(w.x() == 1.0f);
-        REQUIRE(w.y() == 0.0f);
-    }
-}
+// Vector hash function works

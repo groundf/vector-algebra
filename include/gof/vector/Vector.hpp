@@ -125,6 +125,7 @@ class Vector
     }
 
     // reject()
+
     // project()
 
     // flip
@@ -167,6 +168,15 @@ class Vector
     // constexpr T max_value() const noexcept { }
 
     // constexpr T min_value() const noexcept { }
+
+    /**
+     * Scale the vector by factor (scalar).
+     *
+     * This is the same as multiplying vector by scalar with `*` operator.
+     */
+    Vector<N, T> scale(T const& scalar) {
+        return scalar * (*this);
+    }
 
     /*--- STATIC FACTORY METHODS ---*/
 
@@ -234,24 +244,26 @@ class Vector
 };
 
 /*----------------------------------------------------------------------------*/
+/*                                 OPERATORS                                  */
+/*----------------------------------------------------------------------------*/
 
 /**
  * The binary operator `*`.
  */
 template <std::size_t N, Number T>
-constexpr Vector<N, T> operator *(T const& factor, Vector<N, T> const& self) {
-    // Conditional compilation with `constexpr if`.
+constexpr Vector<N, T> operator *(T const& scalar, Vector<N, T> const& self) {
+   // Conditional compilation with `constexpr if`.
     if constexpr(N == 1) {
-        return {factor * self.x()};
+        return {scalar * self.x()};
     }
     if constexpr(N == 2) {
-        return {factor * self.x(), factor * self.y()};
+        return {scalar * self.x(), scalar * self.y()};
     }
     if constexpr(N == 3) {
-        return {factor * self.x(), factor * self.y(), factor * self.z()};
+        return {scalar * self.x(), scalar * self.y(), scalar * self.z()};
     }
     if constexpr(N == 4) {
-        return {factor * self.x(), factor * self.y(), factor * self.z(), factor * self.w()};
+        return {scalar * self.x(), scalar * self.y(), scalar * self.z(), scalar * self.w()};
     }
 }
 
@@ -325,6 +337,10 @@ template <std::size_t N, Number T>
 constexpr Vector<N, T> operator -(Vector<N, T> const& self, T const& bias) {
     return self - (bias * Vector<N, T>::ones());
 }
+
+/*----------------------------------------------------------------------------*/
+/*                                 PRODUCTS                                   */
+/*----------------------------------------------------------------------------*/
 
 /**
  * Calculate the scalar product of two vectors.
