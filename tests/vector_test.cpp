@@ -1,6 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include <gof/Types>
+#include <gof/types>
 
 
 using namespace gof;
