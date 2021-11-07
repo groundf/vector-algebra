@@ -37,13 +37,12 @@ endif()
 add_library(${PROJECT_NAME} INTERFACE)
 
 target_include_directories(${PROJECT_NAME}
-    # PRIVATE
-    #     ${CMAKE_CURRENT_SOURCE_DIR}/src
-    #     ${CMAKE_CURRENT_SOURCE_DIR}/include
-    #     ${CMAKE_CURRENT_SOURCE_DIR}/include/vector
     INTERFACE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}/include
     )
+
+install(TARGETS ${PROJECT_NAME})
 
 Include(FetchContent)
 

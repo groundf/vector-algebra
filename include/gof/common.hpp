@@ -17,7 +17,7 @@ template< class T >
 inline constexpr bool is_complex_v = is_complex<T>::value;
 
 /**
- * The concept fo numeric types.
+ * The concept for numeric types.
  *
  * This is useful for algebraic types such as vector and matrices.
  */

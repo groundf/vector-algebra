@@ -77,6 +77,17 @@ __Here are some general design-notes/style-guide and roadmap.__
     - [x] `u + v` u, v ∈ V
     - [x] `u - v` u, v ∈ V
 
+    - [ ] `x()` cartesian coordinate getter for N >= 1
+    - [ ] `y()` cartesian coordinate getter for N >= 2
+    - [ ] `z()` cartesian coordinate getter for N >= 3
+    - [ ] `w()` cartesian coordinate getter for N == 4
+
+    - [ ] `swizzle`
+    - [ ] `xy`, `xyz`, `xyzw` ...
+
+    - [ ] `rho()` polar coordinate
+    - [ ] `phi()` cylindrical coordinate
+
     - [x] `ones()` factory method
     - [x] `zero()` factory method
     - [ ] `axis_x(T length = 1.0f)` factory method
@@ -99,11 +110,18 @@ __Here are some general design-notes/style-guide and roadmap.__
     - [ ] `reverse` or `negate` or `opposite`: Otočí vektor do opačného směru
     - [ ] `bounce(normal: Vector)`: Provede reflexi vektoru podle zadané normály a zárověň změní směr na opačný. Hodí se to např. pokud se předmět odrazí od stěny viz zákon dopadu a odrazu.
     - [ ] Let vector be iterable with range based loop.
+    - [ ] `distance_to`
+    - [ ] `angle_between`
 
   - [ ] The `Matrix<N, M, T>` template class and its specialized versions (aliases) e.g
     - [ ] `Matrix2f = Matrix<2, 2, float>`,
     - [ ] `Matrix3f = Matrix<3, 3, float>`,
     - [ ] `Matrix4f = Matrix<4, 4, float>` etc.
+
+  - `Position2`/`Position3` is a vector representing the position of some object. This is alias for vector.
+  - `Direction2`/`Direction3` is vector with of unit length pointing to some direction. This is mostly alias for vector.
+
+  - `Basis`: The cartesian base of vectors (orthogonal or orthonormal).
 
   - [ ] The `Point<N, T>`
     - [ ] `from_polar()`
@@ -111,15 +129,17 @@ __Here are some general design-notes/style-guide and roadmap.__
     - [ ] `midpoint`
     - [ ] `interpolate`
     - [ ] `interpolate_from`
+    - [ ] `distance_to` výpočet vzdálenosti mezi dvěma body
+    - [ ] `rotate`, `traslate`, `reflect`, `mirror`, `project`
+    - [ ] konverze bodů mezi různými souřadnými soustavami (polární)
 
+  - [ ] `Angle`
+  - [ ] `Rectangle`
   - [ ] `Line`
   - [ ] `Ray`: For raytracing
   - [ ] `Color`: Represents the RGB or RGBA color.
   - [ ] `Transformation`: Translation, Rotation and so on...
   - [ ] `Rotation < Transformation`:
-
-
-
 
 ## Rererences
 
