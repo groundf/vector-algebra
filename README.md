@@ -9,7 +9,7 @@ __The header-only C++ vector algebra library useful for computer graphics.__
 The library currently live under 𝖌 ∘ 𝖋 namespace.
 
 ```cpp
-#include <gof/types>
+#include <gof/math/types>
 
 using namespace gof;
 ```
@@ -111,6 +111,9 @@ __Here are some general design-notes/style-guide and roadmap.__
     - [ ] `flip()`
     - [x] `scale(factor)` aka `s * v`
     - [ ] `is_opposite(to)`
+    - [ ] `is_close(that, float tolerance)`
+    - [x] `is_zero()`
+    - [x] `length() / magnitude()`
     - [ ] `rotate(angle, axis)` rotate vector by `angle` around `axis`
     - [ ] `rotate_90_cw(axis)` clock-wise
     - [ ] `rotate_90_ccw(axis)` counter-clock-wise
@@ -170,6 +173,7 @@ __Here are some general design-notes/style-guide and roadmap.__
 - https://www.youtube.com/watch?v=rK6ulQaOpso&t=1658s&ab_channel=Gamefromscratch
 - https://www.youtube.com/playlist?list=PLS9MbmO_ssyBfq4jdnzR5NQZV6j_JkWGZ
 
+- https://vector-of-bool.github.io/
 
 ### Engines
 

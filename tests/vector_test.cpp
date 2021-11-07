@@ -7,7 +7,7 @@
 using namespace gof;
 
 
-SCENARIO("Vector copy constructors", "vector")
+SCENARIO("Vector constructors works", "[vector]")
 {
     GIVEN("A vector with N = 2 components")
     {
@@ -34,6 +34,19 @@ SCENARIO("Vector copy constructors", "vector")
         }
     }
 
+    GIVEN("A vector with N = 4 components")
+    {
+        Vector4f u(1.0f);
+        WHEN("A we make vector from this") {
+            auto v = Vector4f(u);
+            THEN("a new vector has a same values") {
+                REQUIRE(v.x() == 1.0f);
+                REQUIRE(v.y() == 0.0f);
+                REQUIRE(v.z() == 0.0f);
+                REQUIRE(v.w() == 0.0f);
+            }
+        }
+    }
 }
 
 SCENARIO("Vector accessors works", "[vector]")
@@ -69,6 +82,25 @@ SCENARIO("Vector accessors works", "[vector]")
             THEN("the size is correct") {
                 REQUIRE(v.size == 3);         // object access
                 REQUIRE(Vector3f::size == 3); // class access
+            }
+        }
+    }
+
+    GIVEN("A vectors with N = 4 components")
+    {
+        Vector4f v(1.0f);
+
+        WHEN("A vector is created")
+        {
+            THEN("we can access `x`, `y`, `z` and `w` component") {
+                REQUIRE(v.x() == 1.0);
+                REQUIRE(v.y() == 0.0);
+                REQUIRE(v.z() == 0.0);
+                REQUIRE(v.w() == 0.0);
+            }
+            THEN("the size is correct") {
+                REQUIRE(v.size == 4);         // object access
+                REQUIRE(Vector4f::size == 4); // class access
             }
         }
     }
@@ -174,6 +206,7 @@ SCENARIO("Vector equality works", "[vector]")
             }
         }
     }
+
     GIVEN("A vectors with N = 3 components")
     {
         Vector3f x(1.0f, 0.0f, 0.0f);
@@ -273,4 +306,5 @@ SCENARIO("Vector arithmetic works", "[vector]")
     }
 }
 
-// Vector hash function works
+
+// TODO Vector hash function works

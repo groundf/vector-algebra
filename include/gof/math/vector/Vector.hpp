@@ -72,7 +72,7 @@ class Vector
     virtual ~Vector() { }
 
     /**
-     * Return the value of component #1.
+     * Get the value of component #1.
      *
      * The method will be compiled only for N >= 1.
      */
@@ -80,7 +80,7 @@ class Vector
     constexpr T x() const noexcept { return _v[0]; }
 
     /**
-     * Return the value of component #2.
+     * Get the value of component #2.
      *
      * The method will be compiled only for N >= 2.
      */
@@ -88,7 +88,7 @@ class Vector
     constexpr T y() const noexcept { return _v[1]; }
 
     /**
-     * Return the value of component #3.
+     * Get the value of component #3.
      *
      * The method will be compiled only for N >= 3.
      */
@@ -96,7 +96,7 @@ class Vector
     constexpr T z() const noexcept { return _v[2]; }
 
     /**
-     * Return the value of component #4.
+     * Get the value of component #4.
      *
      * The method will be compiled only for N >= 4.
      */
@@ -126,12 +126,19 @@ class Vector
      *
      * Also known as _length_ or _magnitude_.
      */
-    constexpr T norm() const noexcept {
+    constexpr T length() const noexcept {
         auto result = T{0};
         for(const auto &e : *this->values()) {
             result += (e * e);
         }
         return std::sqrt(result);
+    }
+
+    /**
+     * An alias for `length()`.
+     */
+    constexpr T magnitude() const noexcept {
+        return length();
     }
 
     // reject()
@@ -253,100 +260,7 @@ class Vector
     const std::array<T, N> _v;
 };
 
-/*----------------------------------------------------------------------------*/
-/*                                 OPERATORS                                  */
-/*----------------------------------------------------------------------------*/
-
-/**
- * The binary operator `*`.
- */
-template <std::size_t N, Number T>
-constexpr Vector<N, T> operator *(T const& scalar, Vector<N, T> const& self) {
-   // Conditional compilation with `constexpr if`.
-    if constexpr(N == 1) {
-        return {scalar * self.x()};
-    }
-    if constexpr(N == 2) {
-        return {scalar * self.x(), scalar * self.y()};
-    }
-    if constexpr(N == 3) {
-        return {scalar * self.x(), scalar * self.y(), scalar * self.z()};
-    }
-    if constexpr(N == 4) {
-        return {scalar * self.x(), scalar * self.y(), scalar * self.z(), scalar * self.w()};
-    }
-}
-
-/**
- * The binary operator `==`.
- */
-template <std::size_t N, Number T>
-constexpr bool operator ==(const Vector<N, T>& self, const Vector<N, T>& that) noexcept {
-    if constexpr(N == 1) {
-        return self.x() == that.x();
-    }
-    if constexpr(N == 2) {
-        return self.x() == that.x() && self.y() == that.y();
-    }
-    if constexpr(N == 3) {
-        return self.x() == that.x() && self.y() == that.y() && self.z() == that.z();
-    }
-    if constexpr(N == 4) {
-        return self.x() == that.x() && self.y() == that.y() && self.z() == that.z() && self.w() == that.w();
-    }
-}
-
-/**
- * The binary operator `!=`.
- */
-template <std::size_t N, Number T>
-constexpr  bool operator !=(const Vector<N, T>& self, const Vector<N, T>& that) noexcept {
-  return ! (self == that);
-}
-
-/**
- * The unary operator `-`.
- */
-template <std::size_t N, Number T>
-constexpr Vector<N, T> operator -(Vector<N, T> const& self) {
-    return (-T{1}) * self;
-}
-
-
-/**
- * The binary operator `+`.
- */
-template <std::size_t N, Number T>
-constexpr Vector<N, T> operator +(Vector<N, T> const& self, Vector<N, T> const& that) {
-    if constexpr(N == 1) {
-        return {self.x() + that.x()};
-    }
-    if constexpr(N == 2) {
-        return {self.x() + that.x(), self.y() + that.y()};
-    }
-    if constexpr(N == 3) {
-        return {self.x() + that.x(), self.y() + that.y(), self.z() + that.z()};
-    }
-    if constexpr(N == 4) {
-        return {self.x() + that.x(), self.y() + that.y(), self.z() + that.z(), self.w() + that.w()};
-    }
-}
-
-/**
- * The binary operator `vector - vec`.
- */
-template <std::size_t N, Number T>
-constexpr Vector<N, T> operator -(Vector<N, T> const& self, Vector<N, T> const& that) {
-    return self + ( (-T{1}) * that );
-}
-
-/**
- * The binary operator `vector - scalar`.
- */
-template <std::size_t N, Number T>
-constexpr Vector<N, T> operator -(Vector<N, T> const& self, T const& bias) {
-    return self - (bias * Vector<N, T>::ones());
-}
+#include "Vector.inl"
 
 /*----------------------------------------------------------------------------*/
 /*                                 PRODUCTS                                   */

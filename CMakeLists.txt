@@ -44,6 +44,12 @@ target_include_directories(${PROJECT_NAME}
 
 install(TARGETS ${PROJECT_NAME})
 
+##############################################################################
+# Executable
+##############################################################################
+# add_executable(example src/example.cpp)
+# target_include_directories(example PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 Include(FetchContent)
 
 ##############################################################################
@@ -72,42 +78,3 @@ if (NOT ${PROJECT_NAME}_IS_SUBPROJECT)
 
     add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}_test)
 endif()
-
-
-##############################################################################
-# Python
-##############################################################################
-# FetchContent_Declare(
-#     pybind11
-#     GIT_REPOSITORY https://github.com/pybind/pybind11
-#     GIT_TAG        v2.8.0
-# )
-# FetchContent_MakeAvailable(pybind11)
-# FetchContent_GetProperties(pybind11)
-
-# if(NOT pybind11_POPULATED)
-#     FetchContent_Populate(pybind11)
-#     add_subdirectory(${pybind11_SOURCE_DIR} ${pybind11_BINARY_DIR})
-# endif()
-
-# find_package(pybind11 CONFIG REQUIRED)
-# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/pybind11)
-
-# message(${CMAKE_CURRENT_SOURCE_DIR})
-
-# if(NOT pybind11_FOUND)
-#     message(FATAL_ERROR "PYBIND NOT FOUND")
-#     message("${pybind11_INCLUDE_DIR}")
-# endif()
-
-# pybind11_add_module(${PROJECT_NAME}_py
-#     ${CMAKE_CURRENT_SOURCE_DIR}/src/vector.cpp)
-
-# include_directories(${PROJECT_NAME}_py
-#     PRIVATE
-#         ${CMAKE_CURRENT_SOURCE_DIR}/src
-#         ${CMAKE_CURRENT_SOURCE_DIR}/include
-#         ${CMAKE_CURRENT_SOURCE_DIR}/include/vector
-#     INTERFACE
-#         ${CMAKE_CURRENT_SOURCE_DIR}/include
-#     )
