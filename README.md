@@ -2,6 +2,8 @@
 
 __The header-only C++ vector algebra library useful for computer graphics.__
 
+[![Release Build](https://github.com/groundf/cgv/actions/workflows/main.yaml/badge.svg)](https://github.com/groundf/cgv/actions/workflows/main.yaml)
+
 ## Usage
 
 The library currently live under 𝖌 ∘ 𝖋 namespace.
