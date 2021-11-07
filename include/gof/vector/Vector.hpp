@@ -25,7 +25,7 @@
 #include <type_traits>
 #include <complex>
 
-#include <gof/common.hpp>
+#include <gof/math/common.hpp>
 
 namespace gof {
 
