@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include <gof/vector/Vector.hpp>
-#include <gof/matrix/Matrix.hpp>
+#include <gof/math/vector/Vector.hpp>
+#include <gof/math/matrix/Matrix.hpp>
 
 namespace gof {
 

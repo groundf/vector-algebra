@@ -53,16 +53,23 @@ ctest -C release --test-dir build --verbose
 ## Overview
 
 All the library types are value objects i.e. that they are immutable and they equality is defined by their attributes.
-In other words, when they have same attributes the are considered equal. because they are immutable we can also define
-hashing functions for them which means they can be stored in maps (`std::map`). The term value object comes from
-Domain Driven Design and you can learn about thsi term [here](https://en.wikipedia.org/wiki/Value_object).
+In other words, when they have the same attributes they are considered equal. Because they are immutable we can define
+hashing functions for them so they can be stored in maps (`std::map`). The term value object comes from
+Domain-Driven Design (DDD) and you can learn about this term [here](https://en.wikipedia.org/wiki/Value_object).
 
 __Here are some general design-notes/style-guide and roadmap.__
 
+- The types are written in title-case e.g. `Vector`
+- The functions are written in snake-case e.g. `length_squared()`.
+- This style helps to be on pair with Python/Lua/Rust/GodotScript.
+
+- [ ] Name header files with uppercase or lowercase?
+- [x] Use delegating constructors when possible (C++ 11).
 - [ ] Should we implement expression templates https://en.wikipedia.org/wiki/Expression_templates?
 - [ ] How to effectively use C++ concepts?
 - [ ] Use header files without extension for interface see https://stackoverflow.com/questions/40624930/c-header-files-with-no-extension
   e.g `Types` header is without suffix and it imports `Vector.hpp` and `Matrix.hpp` headers. This is similar to Haskell lib approach.
+- [ ] Always define empty public/proteted virtual destructor?
 
 - [x] Vector SHOULD implement the constructor populating the vector with the same value.
   `Vector2f v(1.0) -> v(1.0, 1.0)`

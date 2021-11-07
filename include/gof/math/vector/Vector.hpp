@@ -25,7 +25,7 @@
 #include <type_traits>
 #include <complex>
 
-#include <gof/common.hpp>
+#include <gof/math/common.hpp>
 
 namespace gof {
 
@@ -60,6 +60,16 @@ class Vector
      */
     template <typename... Ts>
     constexpr Vector(const Ts &... xs) : _v({{xs...}}) { }
+
+    /**
+     *  Copy constructor.
+     */
+    constexpr explicit Vector(const Vector<N, T>& that) : _v({that.values()}) { }
+
+    /**
+     * Destructor accessible in derived classes.
+     */
+    virtual ~Vector() { }
 
     /**
      * Return the value of component #1.

@@ -1,10 +1,40 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include <gof/types>
+#include <gof/math/types>
+// #include <gof/math/vector/Vector.hpp>
 
 
 using namespace gof;
 
+
+SCENARIO("Vector copy constructors", "vector")
+{
+    GIVEN("A vector with N = 2 components")
+    {
+        Vector2f u(1.0f);
+        WHEN("A we make vector from this") {
+            auto v = Vector2f(u);
+            THEN("a new vector has a same values") {
+                REQUIRE(v.x() == 1.0f);
+                REQUIRE(v.y() == 0.0f);
+            }
+        }
+    }
+
+    GIVEN("A vector with N = 3 components")
+    {
+        Vector3f u(1.0f);
+        WHEN("A we make vector from this") {
+            auto v = Vector3f(u);
+            THEN("a new vector has a same values") {
+                REQUIRE(v.x() == 1.0f);
+                REQUIRE(v.y() == 0.0f);
+                REQUIRE(v.z() == 0.0f);
+            }
+        }
+    }
+
+}
 
 SCENARIO("Vector accessors works", "[vector]")
 {
