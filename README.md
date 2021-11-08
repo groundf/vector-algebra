@@ -108,6 +108,10 @@ __Here are some general design-notes/style-guide and roadmap.__
     - [x] `unit_w()` factory method
     - [ ] `from_angle(angle, length = 1.0)`: Vytvoří (jednotkový) vektor směřujíci do daneho uhlu.
 
+    - [ ] `lerp` linear interpolation
+    - [ ] `slerp` Spherical linear interpolation between normalized vectors.
+    - [ ] `nlerp` Linearly interpolates between the two vectors and normalizes the result.
+
     - [ ] `flip()`
     - [x] `scale(factor)` aka `s * v`
     - [ ] `is_opposite(to)`
@@ -174,6 +178,8 @@ __Here are some general design-notes/style-guide and roadmap.__
 - https://www.youtube.com/playlist?list=PLS9MbmO_ssyBfq4jdnzR5NQZV6j_JkWGZ
 
 - https://vector-of-bool.github.io/
+-
+- https://www.youtube.com/watch?v=ibkT5ao8kGY
 
 ### Engines
 
@@ -219,3 +225,5 @@ The various implementations of vetor and matrix classes
 https://cppdepend.com/blog/?p=13
 
 - https://github.com/ConfettiFX/The-Forge/blob/2665761184b3dfdbc307fa5e19b03b4e3944b578/Common_3/ThirdParty/OpenSource/ModifiedSonyMath/sse/vectormath.hpp
+
+- https://github.com/mosra/magnum/blob/master/src/Magnum/Math/Vector.h

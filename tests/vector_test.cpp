@@ -307,4 +307,30 @@ SCENARIO("Vector arithmetic works", "[vector]")
 }
 
 
+TEST_CASE("`is_unit()` works") {
+    auto u = Vector2f(1.0f, 0.0f);
+    auto v = Vector2f(1.0f, 1.0f);
+    REQUIRE(u.is_unit());
+}
+
+
+TEST_CASE("is_zero() works") {
+    auto u = Vector2f(0.0f, 0.0f);
+    auto v = Vector2f(1.0f, 0.0f);
+
+    REQUIRE(u.is_zero());
+    REQUIRE_FALSE(v.is_zero());
+}
+
+
+TEST_CASE("is_opposite() works") {
+    auto u = Vector2f(1.0f, 2.0f);
+    auto v = Vector2f(-1.0f, -2.0f);
+    REQUIRE(u.is_opposite(v));
+}
+
+// is_parallel_to()
+
+// is_perpendicular_to()
+
 // TODO Vector hash function works
