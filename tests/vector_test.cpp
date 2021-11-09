@@ -6,6 +6,7 @@
 
 using namespace gof;
 
+// BDD style
 
 SCENARIO("Vector constructors works", "[vector]")
 {
@@ -306,13 +307,13 @@ SCENARIO("Vector arithmetic works", "[vector]")
     }
 }
 
+// Classical TDD style
 
 TEST_CASE("`is_unit()` works") {
     auto u = Vector2f(1.0f, 0.0f);
     auto v = Vector2f(1.0f, 1.0f);
     REQUIRE(u.is_unit());
 }
-
 
 TEST_CASE("is_zero() works") {
     auto u = Vector2f(0.0f, 0.0f);
@@ -321,7 +322,6 @@ TEST_CASE("is_zero() works") {
     REQUIRE(u.is_zero());
     REQUIRE_FALSE(v.is_zero());
 }
-
 
 TEST_CASE("is_opposite() works") {
     auto u = Vector2f(1.0f, 2.0f);

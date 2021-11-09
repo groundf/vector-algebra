@@ -21,6 +21,7 @@
 // import <vector>; Modules doesn't work?!
 
 #include <array>
+#include <algorithm> // min/max
 #include <cstddef>
 #include <type_traits>
 #include <complex>
@@ -107,7 +108,7 @@ class Vector
         return _v;
     }
 
-    //{ BOOLEAN
+    //{ `is_`methods
 
     /**
      * Check if this is a zero vector.
@@ -137,11 +138,11 @@ class Vector
     // constexpr bool is_parallel(that) const noexcept {
         // When scalar product is one the they are parallel.
         //
-    }
+    // }
 
     // constexpr bool is_perpendicular(that) const noexcept { }
 
-    //} BOOLEAN
+    //}
 
     /**
      * Calculate the Euclidean norm.
@@ -151,8 +152,8 @@ class Vector
      * Also known as _length_ or _magnitude_.
      */
     constexpr T length() const noexcept {
-        auto result = T{0};
-        for(const auto &e : values()) {
+        T result = T{0};
+        for (const auto &e : this->values()) {
             result += (e * e);
         }
         return std::sqrt(result);
@@ -193,16 +194,18 @@ class Vector
 
     // auto rotate_45_ccw const { }
 
-
-
     /**
      * Whenever has all values equal with specified tolerance.
      */
     // constexpr is_uniform(T tolerance) { }
 
-    // constexpr T max_value() const noexcept { }
+    constexpr T max_value() const noexcept {
+        return std::max(values());
+     }
 
-    // constexpr T min_value() const noexcept { }
+    constexpr T min_value() const noexcept {
+        return std::min(values());
+     }
 
     /**
      * Scale the vector by factor (scalar).
@@ -262,18 +265,12 @@ class Vector
      * Return the vector with all components set to one.
      */
     constexpr static auto ones() -> Vector<N, T> {
-        if constexpr(N == 1) {
-            return {T{1}};
-        }
-        if constexpr(N == 2) {
-            return {T{1}, T{1}};
-         }
-        if constexpr(N == 3) {
-             return {T{1}, T{1}, T{1}};
-         }
+        if constexpr(N == 1) { return { T{1}}; }
+        if constexpr(N == 2) { return { T{1}, T{1}}; }
+        if constexpr(N == 3) { return { T{1}, T{1}, T{1}}; }
     }
 
-  private:
+  protected:
 
     const std::array<T, N> _v;
 };

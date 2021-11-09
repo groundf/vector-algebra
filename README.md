@@ -178,12 +178,14 @@ __Here are some general design-notes/style-guide and roadmap.__
 - https://www.youtube.com/playlist?list=PLS9MbmO_ssyBfq4jdnzR5NQZV6j_JkWGZ
 
 - https://vector-of-bool.github.io/
--
 - https://www.youtube.com/watch?v=ibkT5ao8kGY
 
 ### Engines
 
 #### The open-source game engines
+
+Wicked Engine
+- https://github.com/turanszkij/WickedEngine/blob/master/Content/Documentation/WickedEngine-Documentation.md#wiecs
 
 CryEngine
 - https://github.com/CRYTEK/CRYENGINE
