@@ -66,7 +66,10 @@ if (NOT ${PROJECT_NAME}_IS_SUBPROJECT)
 
     enable_testing()
 
-    add_executable(${PROJECT_NAME}_test tests/vector_test.cpp)
+    add_executable(${PROJECT_NAME}_test
+        tests/test_vector.cpp
+        tests/test_matrix.cpp
+    )
 
     target_include_directories(${PROJECT_NAME}_test
             PRIVATE

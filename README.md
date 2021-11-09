@@ -128,6 +128,7 @@ __Here are some general design-notes/style-guide and roadmap.__
     - [ ] Let vector be iterable with range based loop.
     - [ ] `distance_to`
     - [ ] `angle_between`
+    - [ ] conversion operator to `std::array`?
 
   - [ ] The `Matrix<N, M, T>` template class and its specialized versions (aliases) e.g
     - [ ] `Matrix2f = Matrix<2, 2, float>`,

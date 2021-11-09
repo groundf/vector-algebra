@@ -1,8 +1,14 @@
+/*
+ * VECTOR TESTS
+ */
+
 #include <catch2/catch_test_macros.hpp>
 
 #include <gof/math/types>
 // #include <gof/math/vector/Vector.hpp>
 
+#include <array>
+#
 
 using namespace gof;
 
